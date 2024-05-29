@@ -3,6 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp.View.WeatherPage"
+             xmlns:model="clr-namespace:WeatherApp.Model"
              xmlns:viewmodel="clr-namespace:WeatherApp.ViewModel"
              x:DataType="viewmodel:WeatherPageViewModel"
              BackgroundColor="#152238">
@@ -26,6 +27,44 @@
                     CornerRadius="12"
                     Command="{Binding GetCityWeatherCommand}"/>
         </StackLayout>
-        <Label Text="{Binding CurrentWeather.Main.Temperature}"></Label>
+        <CollectionView ItemsSource="{Binding WeatherDataList}" Margin="0,20,0,0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:WeatherData">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem
+                                            Text="Delete"
+                                            BackgroundColor="Red"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WeatherPageViewModel}}, Path=RemoveCityWeatherCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Frame Margin="10"
+                                       Padding="20"
+                                       BackgroundColor="#3D5A80"
+                                       CornerRadius="25">
+                                    <HorizontalStackLayout>
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding Title}"
+                                                   FontSize="25"
+                                                   TextColor="White"
+                                                   FontAttributes="Bold"/>
+                                            <Label Text="{Binding Sys.Country}"
+                                                   FontSize="14"
+                                                   TextColor="White"/>
+                                        </VerticalStackLayout >
+                                        <Label Text="{Binding Main.Temperature, StringFormat='{0:F0}°C'}"
+                                               FontSize="40"
+                                               FontAttributes="Bold"
+                                               TextColor="White"
+                                               Margin="80, 0 ,0 ,0"
+                                               VerticalTextAlignment="Center"/>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>
