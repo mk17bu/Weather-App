@@ -5,27 +5,20 @@ using WeatherApp.Services;
 
 namespace WeatherApp.ViewModel;
 
-public partial class WeatherPageViewModel : ObservableObject
+public partial class WeatherPageViewModel(WeatherService weatherService) : ObservableObject
 {
-    private WeatherService _weatherService;
-    
     [ObservableProperty]
     private string _cityName = "Barcelona";
 
     [ObservableProperty]
     private WeatherData? _currentWeather;
 
-    public WeatherPageViewModel(WeatherService weatherService)
-    {
-        _weatherService = weatherService;
-    }
-
     [RelayCommand]
     private async Task GetCityWeatherAsync()
     {
         if (!string.IsNullOrWhiteSpace(CityName))
         {
-            CurrentWeather = await _weatherService.GetWeatherData(GenerateRequestUrl(Constants.OpenWeatherMapEndpoint));
+            CurrentWeather = await weatherService.GetWeatherData(GenerateRequestUrl(Constants.OpenWeatherMapEndpoint));
         }
     }
 
