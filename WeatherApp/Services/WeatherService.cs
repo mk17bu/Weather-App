@@ -12,8 +12,10 @@ public class WeatherService
 
     private readonly HttpClient _httpClient;
 
-    public async Task<WeatherData?> GetWeatherData(string query)
+    public Task<WeatherData?> GetWeatherData(string query)
     {
+        throw new NotImplementedException();
+        /*
         WeatherData? weatherData = null;
 
         try
@@ -32,5 +34,6 @@ public class WeatherService
         }
 
         return weatherData;
+        */
     }
 }
