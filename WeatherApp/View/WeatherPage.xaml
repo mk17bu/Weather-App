@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.View.WeatherPage"
+             xmlns:viewmodel="clr-namespace:WeatherApp.ViewModel"
+             x:DataType="viewmodel:WeatherPageViewModel"
+             BackgroundColor="#152238">
+    
+    <VerticalStackLayout Padding="20">
+        <Label Text="My Cities"
+               FontSize="35"
+               FontAttributes="Bold"/>
+        <StackLayout Margin="0,20,0,0"
+                     Orientation="Horizontal">
+            <Entry Placeholder="Search for cities"
+                   PlaceholderColor="White"
+                   Text="{Binding CityName}"
+                   TextColor="White"
+                   Margin="0, 0, 10, 0"
+                   BackgroundColor="#7492B9"
+                   WidthRequest="250"/>
+            <Button Text="Get Weather"
+                    TextColor="White"
+                    BackgroundColor="#7492B9"
+                    CornerRadius="12"
+                    Command="{Binding GetCityWeatherCommand}"/>
+        </StackLayout>
+        <Label Text="{Binding CurrentWeather.Main.Temperature}"></Label>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.View.MainPage"
+             xmlns:viewmodel="clr-namespace:WeatherApp.ViewModel"
+             x:DataType="viewmodel:MainPageViewModel"
+             BackgroundColor="#152238">
+
+    <VerticalStackLayout HorizontalOptions="Center">
+        <Image Source="Resources/Images/umbrella.png"
+               Aspect="AspectFill"
+               HeightRequest="125"
+               WidthRequest="125"
+               Margin="0, 175, 0, 0">
+        </Image>
+        <Label Text="Breeze"
+               FontSize="45"
+               FontAttributes="Bold"
+               Margin="0, 50, 0, 0"/>
+        <Label Text="Weather App"
+               FontSize="20"
+               TextColor="Gray"
+               HorizontalTextAlignment="Center"/>
+        <Button Text="Next"
+                BackgroundColor="LightSkyBlue"
+                CornerRadius="20"
+                Margin="0, 150, 0, 0"
+                Command="{Binding NavigateToWeatherPageCommand}"/>
+    </VerticalStackLayout>
+
+</ContentPage>
