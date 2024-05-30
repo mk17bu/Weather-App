@@ -6,8 +6,15 @@ using WeatherApp.Services;
 
 namespace WeatherApp.ViewModel;
 
-public partial class WeatherPageViewModel(WeatherService weatherService) : ObservableObject
+public partial class WeatherPageViewModel : ObservableObject
 {
+    public WeatherPageViewModel(WeatherService weatherService)
+    {
+        _weatherService = weatherService;
+    }
+    
+    private readonly WeatherService _weatherService;
+    
     [ObservableProperty]
     private string _cityName = "Barcelona";
 
@@ -22,11 +29,11 @@ public partial class WeatherPageViewModel(WeatherService weatherService) : Obser
     {
         if (!string.IsNullOrWhiteSpace(CityName))
         {
-            var weatherData = await weatherService.GetWeatherData(GenerateRequestUrl(Constants.OpenWeatherMapEndpoint));
+            var weatherData = await _weatherService.GetWeatherData(GenerateRequestUrl(Constants.OpenWeatherMapEndpoint));
 
             if (weatherData != null)
             {
-                _weatherDataList.Add(weatherData);
+                WeatherDataList.Add(weatherData);
             }
         }
     }

@@ -5,7 +5,12 @@ namespace WeatherApp.Services;
 
 public class WeatherService
 {
-    private readonly HttpClient _httpClient = new();
+    public WeatherService()
+    {
+        _httpClient = new HttpClient();
+    }
+
+    private readonly HttpClient _httpClient;
 
     public async Task<WeatherData?> GetWeatherData(string query)
     {
